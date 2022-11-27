@@ -1,5 +1,7 @@
-﻿using CornerShop.CustomMiddleware;
+﻿using CornerShop;
+using CornerShop.CustomMiddleware;
 using CornerShop.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IConsoleWriter, ConsoleWriter>();
+builder.Services.AddDbContext<AppDataContext>(x => x.UseSqlServer("CONNECTION STRING"));
 
 var app = builder.Build();
 
