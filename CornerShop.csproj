@@ -31,11 +31,13 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Model\" />
     <None Remove="Model\Entities\" />
+    <None Remove="Model\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
     <Folder Include="Model\" />
     <Folder Include="Model\Entities\" />
+    <Folder Include="Model\DTO\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
