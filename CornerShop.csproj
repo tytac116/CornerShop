@@ -29,9 +29,13 @@
     <None Remove="DependencyInjection\" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="Model\" />
+    <None Remove="Model\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
+    <Folder Include="Model\" />
+    <Folder Include="Model\Entities\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
