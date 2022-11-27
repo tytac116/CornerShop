@@ -21,10 +21,38 @@ namespace CornerShop.Controllers
         }
 
         [HttpGet]
-        public Product Get()
+        public IActionResult GetAll()
         {
-            return new Product();
+            List<Product> PResult = _IProductService.GetAll();
+            return Ok(PResult);
         }
+
+        [HttpGet]
+        public IActionResult Search(string prName)
+        {
+            List<Product> PResult = _IProductService.GetByName(prName);
+            return Ok(PResult);
+        }
+
+        [HttpPut]
+        public IActionResult Update(Product prProduct)
+        {
+            return Ok(_IProductService.Update(prProduct));
+        }
+
+        [HttpPost]
+        public IActionResult Save(Product prProduct)
+        {
+            return Ok(_IProductService.Save(prProduct));
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Product prProduct)
+        {
+            _IProductService.Delete(prProduct);
+            return Ok();
+        }
+
 
         // GET: api/values
         [HttpGet]
