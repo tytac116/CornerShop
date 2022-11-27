@@ -1,6 +1,7 @@
 ﻿using CornerShop;
 using CornerShop.CustomMiddleware;
 using CornerShop.DependencyInjection;
+using CornerShop.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IConsoleWriter, ConsoleWriter>();
-builder.Services.AddDbContext<AppDataContext>(x => x.UseSqlServer("CONNECTION STRING"));
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddDbContext<AppDataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("CornerShop")));
+builder.Services.AddSwaggerGen( c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ASP.NEXT CORE", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -22,6 +28,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSwagger();
+app.UseSwaggerUI( c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "React ASP.NET");
+}) ;
+
 app.UseRouting();
 app.UseMyMiddleware();
 

@@ -1,8 +1,8 @@
 ﻿using System;
 namespace CornerShop.Model.Entities
 {
-	[Table("Products")]
-	public class Products
+	[Table("Product")]
+	public class Product
 	{
 
 		[Key]
@@ -13,7 +13,7 @@ namespace CornerShop.Model.Entities
 		public String Name { get; set; }
 
 
-		public Products()
+		public Product()
 		{
 		}
 	}

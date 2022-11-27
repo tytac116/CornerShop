@@ -12,27 +12,37 @@ namespace CornerShop.Model.Entities
 
         public List<Product> GetAll()
         {
-            return null;
+            return _context.Products.ToList();
         }
 
         public List<Product> GetByName(string prName)
         {
-            return null;
+            var linq = from Product in _context.Products select Product;
+
+            if (!string.IsNullOrWhiteSpace(prName))
+                linq = linq.Where(x => x.Name.ToUpper().Contains(prName.ToUpper()));
+            return linq.ToList();
         }
 
         public List<Product> Save(Product prProduct)
         {
-            return null;
+            _context.Products.Add(prProduct);
+            _context.SaveChanges();
+            return prProduct;
         }
 
         public List<Product> Update(Product prProduct)
         {
-            return null;
+            Product IProductFromDB = _context.Products.First(x => x.Id == prProduct.Id);
+            _context.Entry(IProductFromDB).CurrentValues.SetValues(prProduct);
+            _context.SaveChanges();
+            return prProduct;
         }
 
         public void Delete(Product prProduct)
         {
-
+            _context.Entry(prProduct).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
         }
 
     }

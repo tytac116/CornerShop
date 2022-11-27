@@ -1,4 +1,5 @@
 ﻿using CornerShop.DependencyInjection;
+using CornerShop.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CornerShop.Controllers;
@@ -14,18 +15,28 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
     private IConsoleWriter _IConsoleWriter;
+    private IProductService _IProductService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IConsoleWriter? prIConsoleWriter)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IConsoleWriter? prIConsoleWriter, IProductService prIProductService)
     {
         _logger = logger;
         _IConsoleWriter = prIConsoleWriter;
+        _IProductService = prIProductService;
     }
 
     [HttpGet]
     public IEnumerable<WeatherForecast> Get()
     {
         //Dependency Injection
-        _IConsoleWriter.Write();
+
+        //List<Product> IProducts = _IProductService.GetAll();
+        //List<Product> IProducts = _IProductService.GetByName("Milk");
+
+        //_IConsoleWriter.Write();
+
+        //Add Product
+        Product INewProduct = new Product() { Name = "Bread" };
+        IProductService.Save(INewProduct);
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),
@@ -33,6 +44,6 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
-    }
+    } 
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using CornerShop.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CornerShop
@@ -8,6 +9,8 @@ namespace CornerShop
 		public AppDataContext(DbContextOptions<AppDataContext> options) : base(options)
 		{
 		}
+
+		public DbSet<Product> Products { get; set; }
 	}
 }
 
