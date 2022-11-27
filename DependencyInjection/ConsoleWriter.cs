@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 namespace CornerShop.DependencyInjection
 {
-    public class ConsoleWriter
+    public class ConsoleWriter : IConsoleWriter
     {
         public void Write()
         {
